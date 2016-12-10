@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+	</head>
+	<style>
+		h1 {
+			text-align: center;
+		}
+		.center-text {
+			text-align: center;
+		}
+		.div_bckground{
+			background-color: black;
+			color: white;
+			text-decoration: bold;
+		}
+	</style>
+	<body>
+		
+			<div class="container-fluid center-text">
+				{% if businesses %}
+					<h1>Your Top 10 Rated Finds:</h1>
+					<p>
+					<a href="{{ url_for('index') }}">Look up another location</a>
+					</p>
+					{% for business in businesses %}
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-1">
+							<a href="{{business.url}}">{{ business.name }}</a></div>
+						<div class="col-md-1">
+							<img src= "{{business.rating}}"></div>
+						<div class="col-md-1">
+							<img src= "{{ business.photo }}" class="img-rounded img-responsive"></div>
+					</div>
+					<p></p>
+					{% endfor %}
+				{% else %}
+					<h1>Enter a location and search term</h1>
+					<form action="/" class="form-inline">
+						<div class="form-group">
+							<input type="text" name="location" placeholder="Enter city & state" class="form-control">
+							<input type="text" name="search_term" placeholder="What you looking for?" class="form-control">
+						</div>
+						<input type="submit" value="Submit" class="btn btn-primary">
+					</form>
+				{% endif %}
+				
+			</div>
+		
+	</body>
+</html>
